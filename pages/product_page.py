@@ -23,9 +23,20 @@ class ProductPage(BasePage):
     def should_be_message_with_value_of_cart(self):
         assert self.is_element_present(*ProductPageLocators.MESSAGE_CART_VALUE), "There is no message with value of the cart"
 
+
+
+
     def should_be_value_of_cart_is_same_as_product_price(self):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
         cart_value = self.browser.find_element(*ProductPageLocators.CART_VALUE)
         assert product_price.text == cart_value.text, "Product price and cart value are different"
 
 
+    def should_not_be_success_message_after_adding_product_to_basket(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_PRODUCT_IN_CART), "Success message is presented but should not be"
+
+    def should_not_be_success_message_without_adding_product_to_basket(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_PRODUCT_IN_CART), "Success message should not be presented but it is"
+
+    def should_be_disappeared_the_success_message_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_PRODUCT_IN_CART), "Success message isn't disappeared"
